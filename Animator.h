@@ -3,7 +3,7 @@
 #include <vector>
 #include <list>
 #include <SFML\Graphics.hpp>
-#include <iostream>
+#include "General.h"
 
 class Animator
 {

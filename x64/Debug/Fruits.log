@@ -1,2 +1,8 @@
 ﻿  Actor.cpp
+D:\Projects\C++\Fruits\General.h(5,26): warning C4305: инициализация: усечение из "double" в "float"
+  Object.cpp
+D:\Projects\C++\Fruits\General.h(5,26): warning C4305: инициализация: усечение из "double" в "float"
+  main.cpp
+D:\Projects\C++\Fruits\General.h(5,26): warning C4305: инициализация: усечение из "double" в "float"
+  Создание кода...
   Fruits.vcxproj -> D:\Projects\C++\Fruits\x64\Debug\Fruits.exe

@@ -1,5 +1,4 @@
 #include "Animator.h"
-#include <iostream>
 #include "Actor.h"
 
 float get_rad(sf::Vector2f const vector)
@@ -35,7 +34,7 @@ sf::Vector2f rading_vector(sf::Vector2f const vector)
 
 int main()
 {
-    Actor actor(TYPES::FRUIT, 10.f, 100.f, 50.f);
+    Actor actor(TYPES::OBJECT, 10.f, 100.f, 50.f);
     return 0;
 }
 
