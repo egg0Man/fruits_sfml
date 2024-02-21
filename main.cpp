@@ -34,7 +34,17 @@ sf::Vector2f rading_vector(sf::Vector2f const vector)
 
 int main()
 {
+    sf::RenderWindow window(sf::VideoMode(1000, 800), "My window");
+
     Actor actor(TYPES::OBJECT, 10.f, 100.f, 50.f);
+    actor.add_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true, sf::Vector2i(0, 0), sf::Vector2i(48, 48), 6, 1);
+
+    /*sf::Sprite apple;
+    Animator anim(apple);
+    sf::Vector2i vec(0.f, 0.f);
+    auto& walk_right_anim = anim.create_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true);
+    walk_right_anim.add_frames(vec, vec, 6, 1);*/
+
     return 0;
 }
 
@@ -50,7 +60,7 @@ int main()
 //    sf::Time time = sf::Time::Zero;
 //    sf::Time delta_time;
 //    sf::Clock clock;
-//    sf::Sprite apple;
+//    
 //    Animator anim(apple);
 //
 //    auto& walk_right_anim = anim.create_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true);

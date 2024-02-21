@@ -17,9 +17,9 @@ Actor::Actor(TYPES type_, float mass, float max_health, float strength)
 	print_info("Wrong type in Actor constructor");
 }
 
-void Actor::add_animation(std::string name, std::string path, sf::Time duration, bool looping, sf::Vector2i start, sf::Vector2i size, int frames, int lines)
+void Actor::add_animation(std::string name, std::string path, sf::Time duration, bool looping, sf::Vector2i const& start, sf::Vector2i const& size, unsigned int frames, unsigned int lines)
 {
-	Animator::Animation animation = anim.create_animation(name, path, duration, looping);
+	auto& animation = anim.create_animation(name, path, duration, looping);
 	animation.add_frames(start, size, frames, lines);
 	animations.push_back(animation);
 }

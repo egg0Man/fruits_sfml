@@ -22,7 +22,7 @@ public:
 	
 	Actor(TYPES type_, float mass, float max_health, float strength = 0.f);
 
-	void add_animation(std::string name, std::string path, sf::Time duration, bool looping, sf::Vector2i start, sf::Vector2i size, int frames, int lines);
+	void add_animation(std::string name, std::string path, sf::Time duration, bool looping, sf::Vector2i const& start, sf::Vector2i const& size, unsigned int frames, unsigned int lines);
 
 	~Actor();
 };
