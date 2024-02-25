@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Animator.h"
 #include <list>
+#include <map>
+#include <bitset>
 
 enum TYPES
 {
@@ -13,16 +15,26 @@ enum TYPES
 
 class Actor //класс, с которым будет работать движок, в нём персонаж объединяется с анимациями
 {
-	sf::Sprite sprite;
+	sf::Sprite& sprite;
 	Object *body = nullptr;
-	Animator anim = Animator(sprite);
+	Animator anim;
 	std::list<Animator::Animation> animations;
+	std::map<int, std::string> relations;
 	TYPES type;
+
 public:
 	
-	Actor(TYPES type_, float mass, float max_health, float strength = 0.f);
+	Actor(sf::Sprite& sprite_, TYPES type_, float mass, float max_health, float strength = 0.f);
 
 	void add_animation(std::string name, std::string path, sf::Time duration, bool looping, sf::Vector2i const& start, sf::Vector2i const& size, unsigned int frames, unsigned int lines);
+
+	void create_relations(std::string name, Object::OBJECT_STATES state);
+
+	void create_relations(std::string name, Fruit::FRUIT_STATES state);
+
+	Object* get_obj_ptr();
+
+	void Update(sf::Time dt);
 
 	~Actor();
 };

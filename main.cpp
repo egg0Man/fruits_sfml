@@ -36,14 +36,57 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 800), "My window");
 
-    Actor actor(TYPES::OBJECT, 10.f, 100.f, 50.f);
+    sf::Sprite sprite;
+
+    sprite.setPosition(sf::Vector2f(500.f, 400.f));
+    Actor actor(sprite, TYPES::FRUIT, 10.f, 100.f, 50.f);
+    
     actor.add_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true, sf::Vector2i(0, 0), sf::Vector2i(48, 48), 6, 1);
 
-    /*sf::Sprite apple;
-    Animator anim(apple);
-    sf::Vector2i vec(0.f, 0.f);
-    auto& walk_right_anim = anim.create_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true);
-    walk_right_anim.add_frames(vec, vec, 6, 1);*/
+    actor.create_relations("walk_right", Fruit::FRUIT_STATES::MOVE_RIGHT);
+
+    actor.add_animation("walk_left", "images\\apple_animation.png", sf::seconds(0.5), true, sf::Vector2i(49, 49), sf::Vector2i(48, 48), 6, 1);
+
+    actor.create_relations("walk_left", Fruit::FRUIT_STATES::MOVE_LEFT);
+
+    sf::Clock clock;
+    clock.restart();
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            else if (event.type == sf::Event::KeyPressed)
+            {
+                switch (event.key.code)
+                {
+                case sf::Keyboard::D:
+                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_RIGHT, true);
+                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_LEFT, false);
+                    break;
+                case sf::Keyboard::A:
+                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_LEFT, true);
+                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_RIGHT, false);
+                    break;
+                case sf::Keyboard::W:
+                    
+                    break;
+                case sf::Keyboard::S:
+                    
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        window.clear();
+        actor.Update(clock.restart());
+        window.draw(sprite);
+        window.display();
+    }
 
     return 0;
 }

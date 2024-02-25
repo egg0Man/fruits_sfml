@@ -9,13 +9,15 @@ public:
 	const float MAX_HEALTH;
 	int x, y;
 
+	bool changed = false;
+
 	enum OBJECT_STATES //перечисление, созданное для удобства использования состояний
 	{
-		DESTROYED,
-		GET_DAMAGE
+		GET_DAMAGE,
+		DESTROYED
 	};
-	int stands_count = 2;
-	bool* object_states = new bool[stands_count]{false, false}; //состояние, в которых может находиться объект
+	static const int stands_count = 2;
+	bool* stands = new bool[stands_count]{false, false}; //состояние, в которых может находиться объект
 
 	Object(float mass_, float max_health_);
 
@@ -35,12 +37,13 @@ public:
 class Fruit : public Object //может дать по роже
 {
 public:
+	//порядок важен, чем больше номер, тем приоритетнее состояние(то есть при одновременном ударе и движении, удар будет в приоритете)
 	enum FRUIT_STATES
 	{
-		MOVE_LEFT,
-		MOVE_UP,
-		MOVE_RIGHT,
 		MOVE_DOWN,
+		MOVE_UP,
+		MOVE_LEFT,
+		MOVE_RIGHT,
 		STAND_LEFT,
 		STAND_RIGHT,
 		HIT_LEFT,
@@ -48,8 +51,8 @@ public:
 		DEAD
 	};
 	const float STRENGTH;
-	int stands_count = 9;
-	bool* fruit_states = new bool[stands_count];
+	static const int stands_count = 9;
+	bool* stands = new bool[stands_count];
 
 	void set_stand(FRUIT_STATES stand, bool value);
 

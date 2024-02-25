@@ -5,6 +5,8 @@ Object::Object(float mass_, float max_health) : MASS(mass_), MAX_HEALTH(max_heal
 	health = MAX_HEALTH;
 	x = 0;
 	y = 0;
+	for (int i = 0; i < stands_count; i++)
+		stands[i] = false;
 }
 
 bool Object::is_alive()
@@ -31,32 +33,38 @@ void Object::set_coord(int new_x, int new_y)
 
 void Object::set_stand(OBJECT_STATES stand, bool value)
 {
-	if (stand >= stands_count)
+	if (stand < stands_count and stand >= 0)
 	{
-		print_info("Incorrect stand number");
+		stands[int(stand)] = value;
+		changed = true;
 		return;
 	}
-	object_states[stand] = value;
+	print_info("Incorrect stand number");
 }
 
 Object::~Object()
 {
-	delete[] object_states;
+	delete[] stands;
 }
 
-Fruit::Fruit(float mass_, float max_health_, float strength_) : Object::Object(mass_, max_health_), STRENGTH(strength_) {}
+Fruit::Fruit(float mass_, float max_health_, float strength_) : Object::Object(mass_, max_health_), STRENGTH(strength_) 
+{
+	for (int i = 0; i < stands_count; i++)
+		stands[i] = false;
+}
 
 void Fruit::set_stand(FRUIT_STATES stand, bool value)
 {
-	if (stand >= stands_count)
+	if (stand < stands_count and stand >= 0)
 	{
-		print_info("Incorrect stand number");
+		stands[int(stand)] = value;
+		changed = true;
 		return;
 	}
-	fruit_states[stand] = value;
+	print_info("Incorrect stand number");
 }
 
 Fruit::~Fruit()
 {
-	delete[] fruit_states;
+	delete[] stands;
 }
