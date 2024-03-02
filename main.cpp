@@ -32,8 +32,31 @@ sf::Vector2f rading_vector(sf::Vector2f const vector)
     return vector;
 }
 
+class A
+{
+    
+    char c;
+public:
+    int x = 10;
+    A(char s) : c(s)
+    {
+    }
+
+    virtual char get_c() { return c; }
+
+    virtual ~A() {}
+};
+
+class B : public A
+{
+public:
+    //int x = 2;
+    B(char s) : A(s) { x = 2; }
+};
+
 int main()
 {
+    
     sf::RenderWindow window(sf::VideoMode(1000, 800), "My window");
 
     sf::Sprite sprite;
@@ -41,6 +64,8 @@ int main()
     sprite.setPosition(sf::Vector2f(500.f, 400.f));
     Actor actor(sprite, TYPES::FRUIT, 10.f, 100.f, 50.f);
     
+    std::cout << actor.get_obj_ptr()->get_states_count();
+
     actor.add_animation("walk_right", "images\\apple_animation.png", sf::seconds(0.5), true, sf::Vector2i(0, 0), sf::Vector2i(48, 48), 6, 1);
 
     actor.create_relations("walk_right", Fruit::FRUIT_STATES::MOVE_RIGHT);
@@ -64,12 +89,12 @@ int main()
                 switch (event.key.code)
                 {
                 case sf::Keyboard::D:
-                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_RIGHT, true);
-                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_LEFT, false);
+                    actor.get_obj_ptr()->set_state(Fruit::FRUIT_STATES::MOVE_RIGHT, true);
+                    actor.get_obj_ptr()->set_state(Fruit::FRUIT_STATES::MOVE_LEFT, false);
                     break;
                 case sf::Keyboard::A:
-                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_LEFT, true);
-                    dynamic_cast<Fruit*>(actor.get_obj_ptr())->set_stand(Fruit::FRUIT_STATES::MOVE_RIGHT, false);
+                    actor.get_obj_ptr()->set_state(Fruit::FRUIT_STATES::MOVE_LEFT, true);
+                    actor.get_obj_ptr()->set_state(Fruit::FRUIT_STATES::MOVE_RIGHT, false);
                     break;
                 case sf::Keyboard::W:
                     

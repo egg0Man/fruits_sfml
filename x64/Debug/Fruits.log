@@ -1,7 +1,6 @@
-﻿  Actor.cpp
+﻿  Object.cpp
 D:\Projects\C++\Fruits\General.h(5,26): warning C4305: инициализация: усечение из "double" в "float"
   main.cpp
 D:\Projects\C++\Fruits\General.h(5,26): warning C4305: инициализация: усечение из "double" в "float"
   Создание кода...
-D:\Projects\C++\Fruits\Actor.cpp(46): warning C4715: Actor::get_obj_ptr: значение возвращается не при всех путях выполнения
   Fruits.vcxproj -> D:\Projects\C++\Fruits\x64\Debug\Fruits.exe

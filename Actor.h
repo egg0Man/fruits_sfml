@@ -1,26 +1,19 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-#include "Object.h"
+#include "Body.h"
 #include "Animator.h"
 #include <list>
 #include <map>
-#include <bitset>
 
-enum TYPES
-{
-	OBJECT,
-	FRUIT
-};
 
 class Actor //класс, с которым будет работать движок, в нём персонаж объединяется с анимациями
 {
 	sf::Sprite& sprite;
-	Object *body = nullptr;
+	Body *body = nullptr;
 	Animator anim;
 	std::list<Animator::Animation> animations;
 	std::map<int, std::string> relations;
-	TYPES type;
 
 public:
 	
@@ -32,7 +25,7 @@ public:
 
 	void create_relations(std::string name, Fruit::FRUIT_STATES state);
 
-	Object* get_obj_ptr();
+	Body* get_obj_ptr();
 
 	void Update(sf::Time dt);
 

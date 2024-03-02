@@ -2,5 +2,5 @@
 
 void print_info(std::string msg)
 {
-	std::cout << msg;
+	std::cout << msg << '\n';
 }
